@@ -8,9 +8,9 @@ library(data.table)
 TrajTot=read.csv2("A89_Mill_TrajTot.csv")
 
 # Opening the table containing the pairs and their chacteristics
-ListPairs=read.csv2("ListPairs.csv")
+ListPaires=read.csv2("ListPairs.csv")
 
-for (h in 1:nrow(ListPairs)){
+for (h in 1:nrow(ListPaires)){
   TrajTot1=subset(TrajTot, Participation %in% ListPaires$participation_1[h])
   TrajTot1=cbind(TrajTot1,Cote=1, Point=ListPaires$point_1[h])
   
@@ -29,7 +29,7 @@ for (h in 1:nrow(ListPairs)){
   Seconde=vector(length=nrow(Trav))
   MiliSec=vector(length=nrow(Trav))
   
-  Fich=as.character(Trav$Fichier)
+  Fich=as.character(Trav$File)
   
   for (i in 1:length(Fich)){
     Date[i]=substr(Fich[i],nchar(Fich[i])-18,nchar(Fich[i])-11)
@@ -47,7 +47,7 @@ for (h in 1:nrow(ListPairs)){
   
   Trav=cbind(Trav,Heure,Minute,Seconde,MiliSec,Temps,Date,Datenum)
   
-    Ent1=subset(Trav, DecDeb>0 & DecFin<0 & Cote==1) 
+  Ent1=subset(Trav, DecDeb>0 & DecFin<0 & Cote==1) 
   Sort1=subset(Trav, DecDeb<0 & DecFin>0 & Cote==1) 
   Ent2=subset(Trav, DecDeb>0 & DecFin<0 & Cote==2)
   Sort2=subset(Trav, DecDeb<0 & DecFin>0 & Cote==2)
@@ -58,8 +58,8 @@ for (h in 1:nrow(ListPairs)){
   Sort1$Temps=Sort1$Temps+decalage
   
   library(Hmisc)
-  TC12=find.matches(cbind(Ent1$Datenum,Ent1$Espece,Ent1$Temps)
-                    ,cbind(Sort2$Datenum,Sort2$Espece,Sort2$Temps)
+  TC12=find.matches(cbind(Ent1$Datenum,Ent1$Species,Ent1$Temps)
+                    ,cbind(Sort2$Datenum,Sort2$Species,Sort2$Temps)
                     ,tol=c(0,0,(ListPaires$inter_distance[h]/5+(ListPaires$inter_distance[h]/5*0.5)+5))
                     ,maxmatch=1)
   
@@ -72,8 +72,8 @@ for (h in 1:nrow(ListPairs)){
     }
   }
   
-  TC21=find.matches(cbind(Ent2$Datenum,Ent2$Espece,Ent2$Temps)
-                    ,cbind(Sort1$Datenum,Sort1$Espece,Sort1$Temps)
+  TC21=find.matches(cbind(Ent2$Datenum,Ent2$Species,Ent2$Temps)
+                    ,cbind(Sort1$Datenum,Sort1$Species,Sort1$Temps)
                     ,tol=c(0,0,(ListPaires$inter_distance[h]/5+(ListPaires$inter_distance[h]/5*0.5)+5))
                     ,maxmatch=1)
   
