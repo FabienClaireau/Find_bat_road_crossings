@@ -18,7 +18,7 @@ TrajTot=read.csv2("TrajTot.csv") # fichier produit en première étape d'apparie
 ListPaires=read.csv2("ListPairs.csv")
 
 # If you have non-synchronized acoustic recorders:
-# Opening the table containing the results of 'calculation of time offset potential.R'
+# Opening the table containing the results of 'automatic_calculation_of_the_time_shift.R'
 # Delete line with NA in 'decalageFinal' if it is the case (you have an acoustic recorder recording in mono!)
 ListPaires=read.csv2("ListPairs_Dec_Man.csv")
      
