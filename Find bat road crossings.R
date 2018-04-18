@@ -2,7 +2,7 @@
 rm(list = ls())
 
 # Working directory
-setwd("") # répertoire de travail où sont rangées les tables
+setwd("")
 
 # Opening the table containing the results of the script Pairing microphones
 library(data.table)
